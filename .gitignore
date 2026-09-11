@@ -1,2 +1,25 @@
 dataset/*.csv
 dataset/*.zip
+# Dataset files (large, reproducible via Kaggle download)
+dataset/*.csv
+dataset/*.zip
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments (if you ever create one)
+venv/
+env/
+.venv/
+
+# VS Code settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment/secrets (if you ever add any)
+.env

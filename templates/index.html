@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Day — Player Performance Predictor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Zilla+Slab:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="grain"></div>
+  <div class="floodlight floodlight--left"></div>
+  <div class="floodlight floodlight--right"></div>
+
+  <main class="stage">
+    <header class="hero">
+      <p class="hero__eyebrow">Est. IPL, 2008 — data through 2023</p>
+      <h1 class="hero__title">MATCH DAY<br>PREDICTOR</h1>
+      <p class="hero__sub">Pick a name off the teamsheet. We'll pull their record from the archives and call the number before the toss.</p>
+    </header>
+
+    <section class="stub" aria-label="Player selector">
+      <div class="stub__perf" aria-hidden="true"></div>
+      <label for="playerSelect" class="stub__label">Batter</label>
+      <select id="playerSelect" class="stub__select">
+        <option value="">— choose a player —</option>
+        {% for player in players %}
+          <option value="{{ player }}">{{ player }}</option>
+        {% endfor %}
+      </select>
+
+      <div id="quickStats" class="stub__quick hidden">
+        <div><span id="qCareerAvg">–</span><small>career avg</small></div>
+        <div><span id="qRecentForm">–</span><small>recent form</small></div>
+        <div><span id="qMatches">–</span><small>innings</small></div>
+      </div>
+
+      <button id="predictBtn" class="stub__btn" disabled>Call the number</button>
+      <p id="errorMsg" class="stub__error hidden"></p>
+    </section>
+
+    <section id="scoreboard" class="scoreboard hidden" aria-live="polite">
+      <p class="scoreboard__label">Projected score</p>
+      <p class="scoreboard__digits"><span id="scoreDigits">0</span><span class="scoreboard__unit">runs</span></p>
+    </section>
+
+    <section id="ledger" class="ledger hidden">
+      <h2 class="ledger__title">Last innings on record</h2>
+      <table class="ledger__table">
+        <thead><tr><th>Date</th><th>Runs</th></tr></thead>
+        <tbody id="ledgerBody"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="stitch">
+    <p>Built from ball-by-ball IPL records, 2008–2023 · figures reflect form on record, not a promise of what happens out in the middle</p>
+  </footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
